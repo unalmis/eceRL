@@ -3,7 +3,7 @@
 \begin{document}
 \section{Hyperparameters}\label{app:b}
 
-In the Table \ref{tab:cheetah_hyp} below, we display the hyperparameters we used to train RDE with SAC in the \texttt{Cheetah-Run} setting. 
+In the Table \ref{tab:cheetah_hyp} below, we display the hyperparameters we used to train RDE with SAC in the \texttt{Cheetah-Run} setting.
 As we aim to reproduce the results of \cite{kim2023} exactly, almost all of our network parameters are identical to theirs.
 However, for the sake of decreasing computational complexity, we adjust a few of their hyperparameters.
 Namely, we use a minibatch size of $512$ instead of $1024$ and $256$ hidden units in each network layer instead of $1024$.
@@ -11,98 +11,98 @@ Note that the network layers are multi-layer perceptions (MLPs).
 Moreover, we also implement a delayed network update frequency by setting $f=2$ unlike \cite{kim2023} who uses $f=1$.
 
 \begin{table}[h]
-    \caption{Hyperparameters for RDE with SAC in the \texttt{Cheetah-Run} Setting}
-    \label{tab:cheetah_hyp}
-    \centering
-    \begin{tabular}{l|l}
-        \toprule
-         Hyperparameter & Value \\
-         \hline
-         \# of Ensemble Agents $N$ & $2$ \\
-         Training steps & $(1 \times 10^6, 5 \times 10^5)$ \\
-         Discount factor & $0.99$ \\
-         Initial collection steps & $5000$ \\
-         Minibatch size & $512$ \\
-         Optimizer & Adam \\
-         Learning rate $\eta$ & $0.0003$ \\
-         Network activation (all) & ReLU \\
-         Network layer type (all) & MLP \\
-         Number of hidden network layers (all) & $2$ \\
-         Number of hidden units per network layer (all) & $256$ \\
-         Initial temperature & $1$ \\
-         Replay buffer size & $1 \times 10^6$ \\
-         Replay ratio & $(1,2,4)$ \\
-         Target update frequency $f$ & $2$ \\
-         Target update weight $\tau$ & $0.005$ \\
-         Reset interval $T_{reset}$ & $(4 \times 10^5, 2 \times 10^5, 1 \times 10^5)$ \\
-         Action selection coefficient $\beta$ & $50$ \\
-         \bottomrule
-    \end{tabular}
+	\caption{Hyperparameters for RDE with SAC in the \texttt{Cheetah-Run} Setting}
+	\label{tab:cheetah_hyp}
+	\centering
+	\begin{tabular}{l|l}
+		\toprule
+		Hyperparameter                                 & Value                                           \\
+		\hline
+		\# of Ensemble Agents $N$                      & $2$                                             \\
+		Training steps                                 & $(1 \times 10^6, 5 \times 10^5)$                \\
+		Discount factor                                & $0.99$                                          \\
+		Initial collection steps                       & $5000$                                          \\
+		Minibatch size                                 & $512$                                           \\
+		Optimizer                                      & Adam                                            \\
+		Learning rate $\eta$                           & $0.0003$                                        \\
+		Network activation (all)                       & ReLU                                            \\
+		Network layer type (all)                       & MLP                                             \\
+		Number of hidden network layers (all)          & $2$                                             \\
+		Number of hidden units per network layer (all) & $256$                                           \\
+		Initial temperature                            & $1$                                             \\
+		Replay buffer size                             & $1 \times 10^6$                                 \\
+		Replay ratio                                   & $(1,2,4)$                                       \\
+		Target update frequency $f$                    & $2$                                             \\
+		Target update weight $\tau$                    & $0.005$                                         \\
+		Reset interval $T_{reset}$                     & $(4 \times 10^5, 2 \times 10^5, 1 \times 10^5)$ \\
+		Action selection coefficient $\beta$           & $50$                                            \\
+		\bottomrule
+	\end{tabular}
 \end{table}
 
-In Table \ref{tab:mc_hyp} below, we display the hyperparameters we used in the \texttt{Mountain Car Continuous} environment when using RDE with SAC. 
+In Table \ref{tab:mc_hyp} below, we display the hyperparameters we used in the \texttt{Mountain Car Continuous} environment when using RDE with SAC.
 Our parameters are very similar to those in Table \ref{tab:cheetah_hyp} except because the \texttt{Mountain Car Continuous} environment is easier to learn than the \texttt{Cheetah-Run} setting, we use fewer training steps and hence also use smaller values for $T_{reset}$.
 Lastly, we display the hyperparameters we used to train RDE with DQN in the \texttt{Cart Pole} environment below in Table \ref{tab:cp_hyp}.
 
 \begin{table}[h]
-    \caption{Hyperparameters for RDE with SAC in the \texttt{Mountain Car Continuous} Setting}
-    \label{tab:mc_hyp}
-    \centering
-    \begin{tabular}{l|l}
-        \toprule
-         Hyperparameter & Value \\
-         \hline
-         \# of Ensemble Agents $N$ & $2$ \\
-         Training steps & $(2 \times 10^5, 1 \times 10^5)$ \\
-         Discount factor & $0.99$ \\
-         Initial collection steps & $5000$ \\
-         Minibatch size & $512$ \\
-         Optimizer & Adam \\
-         Learning rate $\eta$ & $0.0003$ \\
-         Network activation (all) & ReLU \\
-         Network layer type (all) & MLP \\
-         Number of hidden network layers (all) & $2$ \\
-         Number of hidden units per network layer (all) & $256$ \\
-         Temperature & $0.01$ \\
-         Replay buffer size & $2 \times 10^5$ \\
-         Replay ratio & $(1,2,4)$ \\
-         Target update frequency $f$ & $2$ \\
-         Target update weight $\tau$ & $0.005$ \\
-         Reset interval $T_{reset}$ & $(8 \times 10^4, 4 \times 10^4, 2 \times 10^4)$ \\
-         Action selection coefficient $\beta$ & $50$ \\
-         \bottomrule
-    \end{tabular}
+	\caption{Hyperparameters for RDE with SAC in the \texttt{Mountain Car Continuous} Setting}
+	\label{tab:mc_hyp}
+	\centering
+	\begin{tabular}{l|l}
+		\toprule
+		Hyperparameter                                 & Value                                           \\
+		\hline
+		\# of Ensemble Agents $N$                      & $2$                                             \\
+		Training steps                                 & $(2 \times 10^5, 1 \times 10^5)$                \\
+		Discount factor                                & $0.99$                                          \\
+		Initial collection steps                       & $5000$                                          \\
+		Minibatch size                                 & $512$                                           \\
+		Optimizer                                      & Adam                                            \\
+		Learning rate $\eta$                           & $0.0003$                                        \\
+		Network activation (all)                       & ReLU                                            \\
+		Network layer type (all)                       & MLP                                             \\
+		Number of hidden network layers (all)          & $2$                                             \\
+		Number of hidden units per network layer (all) & $256$                                           \\
+		Temperature                                    & $0.01$                                          \\
+		Replay buffer size                             & $2 \times 10^5$                                 \\
+		Replay ratio                                   & $(1,2,4)$                                       \\
+		Target update frequency $f$                    & $2$                                             \\
+		Target update weight $\tau$                    & $0.005$                                         \\
+		Reset interval $T_{reset}$                     & $(8 \times 10^4, 4 \times 10^4, 2 \times 10^4)$ \\
+		Action selection coefficient $\beta$           & $50$                                            \\
+		\bottomrule
+	\end{tabular}
 \end{table}
 
 \begin{table}[h]
-    \caption{Hyperparameters for RDE with DQN in the \texttt{Cart Pole} Setting}
-    \label{tab:cp_hyp}
-    \centering
-    \begin{tabular}{l|l}
-        \toprule
-         Hyperparameter & Value \\
-         \hline
-         \# of Ensemble Agents $N$ & $2$ \\
-         Training steps & $(2 \times 10^5, 1 \times 10^5)$ \\
-         Discount factor & $0.99$ \\
-         Initial collection steps & $1 \times 10^4$ \\
-         Minibatch size & $32$ \\
-         Optimizer & Adam \\
-         \epsilon & $0.9 \rightarrow 0.05$ \\
-         \epsilon decay time step & $10^5$ \\
-         Learning rate $\eta$ & $0.0005$ \\
-         Network activation (all) & ReLU \\
-         Network layer type (all) & MLP \\
-         Number of hidden network layers (all) & $2$ \\
-         Number of hidden units per network layer (all) & $128$ \\
-         Replay buffer size & $5 \times 10^4$ \\
-         Replay ratio & $(1,2,4)$ \\
-         Target update frequency $f$ & $10$ episodes \\
-         Network testing frequency & $20$ episodes \\
-         Reset interval $T_{reset}$ & $(8 \times 10^4, 4 \times 10^4)$ \\
-         Action selection coefficient $\beta$ & $0.01$ \\
-         \bottomrule
-    \end{tabular}
+	\caption{Hyperparameters for RDE with DQN in the \texttt{Cart Pole} Setting}
+	\label{tab:cp_hyp}
+	\centering
+	\begin{tabular}{l|l}
+		\toprule
+		Hyperparameter                                 & Value                            \\
+		\hline
+		\# of Ensemble Agents $N$                      & $2$                              \\
+		Training steps                                 & $(2 \times 10^5, 1 \times 10^5)$ \\
+		Discount factor                                & $0.99$                           \\
+		Initial collection steps                       & $1 \times 10^4$                  \\
+		Minibatch size                                 & $32$                             \\
+		Optimizer                                      & Adam                             \\
+		\epsilon                                       & $0.9 \rightarrow 0.05$           \\
+		\epsilon decay time step                       & $10^5$                           \\
+		Learning rate $\eta$                           & $0.0005$                         \\
+		Network activation (all)                       & ReLU                             \\
+		Network layer type (all)                       & MLP                              \\
+		Number of hidden network layers (all)          & $2$                              \\
+		Number of hidden units per network layer (all) & $128$                            \\
+		Replay buffer size                             & $5 \times 10^4$                  \\
+		Replay ratio                                   & $(1,2,4)$                        \\
+		Target update frequency $f$                    & $10$ episodes                    \\
+		Network testing frequency                      & $20$ episodes                    \\
+		Reset interval $T_{reset}$                     & $(8 \times 10^4, 4 \times 10^4)$ \\
+		Action selection coefficient $\beta$           & $0.01$                           \\
+		\bottomrule
+	\end{tabular}
 \end{table}
 
 

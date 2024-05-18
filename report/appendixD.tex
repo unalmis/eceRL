@@ -6,54 +6,54 @@
 In the tables below, we report the compute times of our experiments in each of the three environments: \texttt{Cheetah-Run}, \texttt{Mountain Car Continuous}, and \texttt{Cart Pole}.
 
 \begin{table}[h]
-    \caption{Run Times for SAC in the \texttt{Cheetah-Run} Setting on GPU}
-    \label{tab:cheetah_times}
-    \centering
-    \begin{tabular}{cccc}
-        \toprule
-        & Baseline & Naive Reset & RDE \\
-        \hline
-        $RR=1$ for $1 \times 10^6$ time steps & $3$ hrs & $6$ hrs & $12$ hrs \\
-        \hline 
-        $RR=2$ for $1 \times 10^6$ time steps & $6$ hrs & $12$ hrs & $24$ hrs \\
-        \hline
-        $RR=4$ for $5 \times 10^5$ time steps & $6$ hrs & $12$ hrs & $24$ hrs \\
-        \bottomrule
-    \end{tabular}
+	\caption{Run Times for SAC in the \texttt{Cheetah-Run} Setting on GPU}
+	\label{tab:cheetah_times}
+	\centering
+	\begin{tabular}{cccc}
+		\toprule
+		                                      & Baseline & Naive Reset & RDE      \\
+		\hline
+		$RR=1$ for $1 \times 10^6$ time steps & $3$ hrs  & $6$ hrs     & $12$ hrs \\
+		\hline
+		$RR=2$ for $1 \times 10^6$ time steps & $6$ hrs  & $12$ hrs    & $24$ hrs \\
+		\hline
+		$RR=4$ for $5 \times 10^5$ time steps & $6$ hrs  & $12$ hrs    & $24$ hrs \\
+		\bottomrule
+	\end{tabular}
 \end{table}
 
 \begin{table}[h]
-    \caption{Run Times for SAC in the \texttt{Mountain Car Continuous} Setting on CPU}
-    \label{tab:mc_times}
-    \centering
-    \begin{tabular}{cccc}
-        \toprule
-        & Baseline & Naive Reset & RDE \\
-        \hline
-        $RR=1$ for $2 \times 10^5$ time steps & $1.5$ hrs & $3$ hrs & $6$ hrs \\
-        \hline 
-        $RR=2$ for $2 \times 10^5$ time steps & $3$ hrs & $6$ hrs & $12$ hrs \\
-        \hline
-        $RR=4$ for $1 \times 10^5$ time steps & $3$ hrs & $6$ hrs & $12$ hrs \\
-        \bottomrule
-    \end{tabular}
+	\caption{Run Times for SAC in the \texttt{Mountain Car Continuous} Setting on CPU}
+	\label{tab:mc_times}
+	\centering
+	\begin{tabular}{cccc}
+		\toprule
+		                                      & Baseline  & Naive Reset & RDE      \\
+		\hline
+		$RR=1$ for $2 \times 10^5$ time steps & $1.5$ hrs & $3$ hrs     & $6$ hrs  \\
+		\hline
+		$RR=2$ for $2 \times 10^5$ time steps & $3$ hrs   & $6$ hrs     & $12$ hrs \\
+		\hline
+		$RR=4$ for $1 \times 10^5$ time steps & $3$ hrs   & $6$ hrs     & $12$ hrs \\
+		\bottomrule
+	\end{tabular}
 \end{table}
 
 \begin{table}[h]
-    \caption{Run Times for DQN in the \texttt{Cart Pole} Setting on CPU}
-    \label{tab:cp_times}
-    \centering
-    \begin{tabular}{c|c|c|c}
-        \toprule
-        & Baseline & Naive Reset & RDE \\
-        \hline
-        $RR=1$ for $1 \times 10^6$ time steps & $1$ hr & $2$ hrs & $4$ hrs \\
-        \hline 
-        $RR=2$ for $1 \times 10^6$ time steps & $2$ hrs & $4$ hrs & $8$ hrs \\
-        \hline
-        $RR=4$ for $5 \times 10^6$ time steps & $2$ hrs & $4$ hrs & $8$ hrs \\
-        \bottomrule
-    \end{tabular}
+	\caption{Run Times for DQN in the \texttt{Cart Pole} Setting on CPU}
+	\label{tab:cp_times}
+	\centering
+	\begin{tabular}{c|c|c|c}
+		\toprule
+		                                      & Baseline & Naive Reset & RDE     \\
+		\hline
+		$RR=1$ for $1 \times 10^6$ time steps & $1$ hr   & $2$ hrs     & $4$ hrs \\
+		\hline
+		$RR=2$ for $1 \times 10^6$ time steps & $2$ hrs  & $4$ hrs     & $8$ hrs \\
+		\hline
+		$RR=4$ for $5 \times 10^6$ time steps & $2$ hrs  & $4$ hrs     & $8$ hrs \\
+		\bottomrule
+	\end{tabular}
 \end{table}
 
 
