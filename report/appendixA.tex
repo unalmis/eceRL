@@ -1,0 +1,181 @@
+\documentclass[base]{subfiles}
+
+\begin{document}
+\section{Algorithms} \label{app:a}
+
+\subsection{Pseudocode for RDE with SAC}
+
+The algorithm below describes the implementation we use of RDE with SAC.
+
+\begin{algorithm}
+\caption{Algorithm Pseudocode for RDE+SAC}
+\label{alg:rde_sac}
+\begin{algorithmic}[1]
+\Require Learning rate $\eta$, Target update frequency $f$, Target update rate $\tau$, Discount $\gamma$, Ensemble size $N$, Reset frequency $T_{reset}$, Replay Ratio $RR$, Coefficient $\beta$, Temperature $temp$, Target update weight $\tau$.
+
+\State Initialize agent parameters $\{ \theta_1, ..., \theta_N \}$, where each agent $\theta_i$ has policy parameters $\xi_i$, target policy parameters $\xi_i^{-}$, parameters for two Q-networks $\phi_{i,1}$ and $\phi_{i,2}$ (which we denote collectively as $\phi_i$), and corresponding target Q-network parameters $\phi_{i,1}^{-}$ and $\phi_{i,2}^{-}$.
+\State Initialize the replay buffer $\symcal{B}$.
+\For {each episode}
+\For {each timestep $t$}
+\For {$i=1$ to $N$}
+\State Based on state $s_t$, select an action $a_t^i$ using current policies $\pi_{\theta_i}$.
+\EndFor
+
+\State Calculate $p_{select}$ using Eq. \ref{eq:p_select}.
+\State Sample action $a_t$ from $p_{select}$ and play it.
+\State Store observed transition $(s_t, a_t, r_t, s_{t+1})$ in the replay buffer $\symcal{B}$.
+
+\For {$j = 1$ to $RR$}
+\State Sample a random minibatch from $\symcal{B}$.
+
+\For {$i = 1$ to $N$}
+
+\State Take gradient steps of size $\eta$ to update $\phi_i$ to minimize:
+
+\begin{equation}
+\notag
+    L(\phi_i, \symcal{B}) = \mathbb{E}_{(s, a, r, s') \sim \symcal{U(B)}} \left[ \left( Q_{target} - Q(s, a, \phi_i)  \right)^2 \right]
+\end{equation}
+
+where for each $(s,a,r,s')$ pair, $Q_{target} = r + \gamma (Q(s,a,\phi_i^{-}) + temp*\symcal{H}^{\pi}$).
+
+\If{$t\%f$ $==$ $0$}
+
+\State Take a gradient steps of size $\eta$ to update the policy $\xi_i$ to minimize:
+\begin{equation}
+\notag
+    L(\xi_i, \symcal{B}) = \mathbb{E}_{s \sim \symcal{U(B)}, a \sim \pi_{\xi_i}} \left[  temp * \log (\pi_{\xi_i} (a | s)) - Q_{\phi_i} (s,a) \right]
+\end{equation}
+
+\State Update $\phi_i^{-} \leftarrow \tau \phi_i + (1-\tau) \phi_i^{-}$
+\State Update $\xi_i^{-} \leftarrow \tau \xi_i + (1-\tau) \xi_i^{-}$
+
+
+\EndIf
+
+\EndFor
+\EndFor
+
+\If {$t$ \% $(T_{reset} / N) == 0$}
+\State Reset $\theta_k$ and set $k \leftarrow (k+1) \% N$
+\EndIf
+
+\EndFor
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+In addition to the algorithm above, which we directly apply to the \texttt{Mountain Car Continuous} environment, we also implement target entropy annealing and a change of variables in the \texttt{Cheetah-Run} environment. We find that these features are necessary for TD3 to converge, and we explain them in the following sections.
+
+\subsubsection{Target Entropy Annealing} \label{teakneel}
+The first technical addition in our TD3 algorithm is target entropy annealing.
+Without temperature annealing, the only regularization term in our loss function in the form of a constant temperature times the entropy of the distribution from which we select actions at a particular state.
+However, as the optimizer attempts to minimize the loss on some finite-sized empirical sample of actions and rewards, there are opportunities to overfit to the sample.
+The resulting prediction for the probability distribution of actions given that state will then have less entropy, which can be undesirable if we are not certain that the sample was representative.
+We would ideally like to achieve the minimium error as determined by the loss function while retaining maximum entropy, where the latter objective is one that penalizes overfitting, for low entropy is a first order estimate of overfitting.
+Therefore, we can improve performance by using our prior knowledge to select a target or goal entropy of our distributions.
+Throughout the optimization, we dynamically change the temperature to encourage the policy's entropy (according to \cite{sac}) at each state to approach the target entropy via regularization term in loss function.
+Formally, we append the following term to our loss function
+\begin{equation}
+R = \alpha (\symcal{H} - \symcal{H}_{\text{goal}})
+\end{equation}
+where \(\alpha\) specifies the temperature parameter which is tuned by the optimizer so as to minimize loss.
+We can see that this has the desirable characteristic that when \(\mathcal{H} <  \mathcal{H}_{\text{goal}}\), \(\alpha\) will be increased to minimize \(R\), prioritizing an increase in entropy.
+Otherwise when \(\symcal{H} > \symcal{H}_{\text{goal}}\), \(\alpha\) will be decreased to minimize \(R\), prioritizing a decrease in the other terms of the loss function, (typically at the expense of reducing entropy).
+We choose \(\symcal{H}_{\text{goal}}\) to be the negative of the dimension of the action space, in agreement with \cite{kim2023}.
+That is, we choose some value that is proportional to the entropy of the action space, so that the optimizer will be able to more easily tune \(\alpha\).
+Note that negative entropy is not an issue because this is the differential entropy, which is standard practice in reinforcement learning, even though it is not a dimensionless quantity: it has units of length. 
+Therefore, care should be taken to scale the entropy by the measure of the action space.
+For \texttt{Cheetah-Run} environment we consider, the action space consists of unit discs on the real line \(\closeint{-1}{1}\), so the scaling is up to a small constant already normalized by the measure of the action space (the optimizer can handle the necessary small correction).
+
+\subsubsection{Change of Variables}
+To accomplish the change of variables suggestion by \cite{sac}, we draw actions \(a\) according to the current state and policy, where \(u \sim N(\text{mean}, \text{variance})\) for some Multivariate Gaussian distribution, and 
+\(a = \tanh u\).
+By composing these maps to select an action, we are altering the entropy of the effective distribution which generates the samples, and we needed to account for this for the model to be successful.
+The modified entropy is
+\begin{align*}
+\symcal{H} (\pi(a \mid s)) & = \mathbb{E}{- \log \pi (a \mid s)} \\
+& = H (N(\text{mean}, \text{variance})) + \log \norm{\mathbf{D}_u \tanh u} \\
+& = H (N(\text{mean}, \text{variance})) +  \mathbb{E}*{\sum_{i = 1}^D (1 - \tanh(u)^2)} + \log 1
+\end{align*}
+where the final term is zero since the action space is already normalized to 1.
+In our code, this is implemented in an automatically differentiable manner via PyTorch's \verb|distribution.transform(tanh)| and \verb|distribution.log_abs_det_jacobian(a, u)|.
+
+
+\subsubsection{Suggestions to Improve Target Entropy Annealing}
+
+For future work, we also suggest how the target entropy annealing strategy described in Appendix \ref{teakneel} can be improved.
+It is typical in reinforcement learning implementations to choose \(H_{\text{goal}}\) to be a constant that is reflective of our prior knowledge, in many cases setting it to some linear function of the dimensional of the action space.
+However, it is a somewhat lazy application of prior knowledge to have a goal entropy that is uniform throughout the state action space.
+The optimizer will need to work harder to tune the temperature \(\alpha\) to overcome this bad approximation.
+To give a concrete example, suppose the problem at hand is to balance a pole on a cart.
+When the pole is approximately upright, the choice is not clear which direction to move the cart.
+For it could have just started falling in the direction of its tilt, or perhaps it experienced an acceleration at an earlier time that is now realized as an angular velocity \(\omega > 0\) when the displacement is \(\Delta \theta < 0\), so this tilt will soon disappear without external interaction.
+Therefore, in states with \(\Delta \theta \approx 0\) a high target entropy is desirable.\footnote{That is, high entorpy in the direction of movement. The magnitude of the external force applied to balance the pole should still be small, as desired for most states in this problem.}
+In other states, say with large \(\abs{\Delta \theta}\), the optimal action is clear and the cart should move in the direction to minimize \(\abs{\Delta \theta}\) regardless of the velocity \(\omega\) as the risk, or in the safety RL context the cost, of not performing corrective action is too large.
+These states are better suited with a low goal entropy assignment.
+Making this improvements to the target entropy annealing model would significantly ease the problem given to the optimizer of adaptive selection of the best temperature.
+However, in general, it can be burdensome to implement this improved target entropy annealing because it can be difficult to determine which states should be assigned low entropy.
+
+\newpage
+
+\subsection{Pseudocode for RDE with SAC}
+
+Next, we display pseudocode for our implementation of RDE with DQN.
+
+\begin{algorithm}
+\caption{Algorithm Pseudocode for RDE+DQN}
+\label{alg:rde_dqn}
+\begin{algorithmic}[1]
+\Require Epsilon $\epsilon$, Learning rate $\eta$, Target update frequency $f$, Discount $\gamma$, Ensemble size $N$, Reset frequency $T_{reset}$, Replay Ratio $RR$, Coefficient $\beta$.
+
+
+\State Initialize Q-function parameters $\{ \theta_1, ..., \theta_N \}$ and target Q-function parameters $\{ \theta_1^{-}, ..., \theta_N^{-} \}$.
+\State Initialize the replay buffer $\symcal{B}$.
+\For {each episode}
+\For {each timestep $t$}
+\For {$i=1$ to $N$}
+\State Based on state $s_t$, select an action $a_t^i$ according to the $\epsilon$-greedy policy.
+\EndFor
+
+\State Calculate $p_{select}$ using Eq. \ref{eq:p_select}.
+\State Sample action $a_t$ from $p_{select}$ and play it.
+\State Store observed transition $(s_t, a_t, r_t, s_{t+1})$ in the replay buffer $\symcal{B}$.
+
+\For {$j = 1$ to $RR$}
+\State Sample a random minibatch from $\symcal{B}$.
+
+\For {$i = 1$ to $N$}
+
+\State Take gradient step of size $\eta$ to update $\theta_i$ to minimize:
+
+\begin{equation}
+\notag
+    L(\theta, \symcal{B}) = \mathbb{E}_{(s, a, r, s') \sim \symcal{U(B)}} \left[ \left( r + \gamma \max_{a'} Q(s', a'; \theta_i^{-}) - Q(s, a, \theta_i)  \right)^2 \right]
+\end{equation}
+
+\EndFor
+
+\If{$f \% t == 0$}
+    \State Copy $\{ \theta_1, ..., \theta_N \}$ into $\{ \theta_1^{-}, ..., \theta_N^{-} \}$
+\EndIf
+
+\EndFor
+
+\If {$t$ \% $(T_{reset} / N) == 0$}
+\State Reset $\theta_k$ and set $k \leftarrow (k+1) \% N$
+\EndIf
+
+\EndFor
+
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+
+\ifSubfilesClassLoaded{%
+	\printbibliography
+}{}
+
+\end{document}
+

@@ -1,0 +1,34 @@
+\begin{lemma}
+For \(\beta \in \symbb{R}_+\), the softmax function \(s_{\beta} \colon \symbb{R}^c \to \symbb{R^c}\) is defined by
+\begin{equation*}
+	s_{\beta} \colon x \mapsto \begin{bmatrix}
+		\e^{\beta x(1)} \\
+		\vdots          \\
+		\e^{\beta x(c)}
+	\end{bmatrix} / \sum_{k=1}^c \e^{\beta x(k)}
+\end{equation*}
+where \(\beta\) is the coldness or inverse temperature.
+\(s_{\beta}(x)\) smoothly approximates the argmax function as \(\beta \to \infty\) and \(f_{\beta} \colon x \mapsto \innerp{\softargmax(\beta x)}{x}\) smoothly approximates the max function as \(\beta \to \infty\)
+\end{lemma}
+\begin{proof}
+	Let \(x \in \symbb{R}^c\) and \(m = \max_{\set{i \in \symbb{N} \given i \leq c}} x(i)\).
+	Let  \(M = \set{i \given x(i) = m}\) be the set of indices which yield the maximum \(m\).
+	By construction, we have that \(x(i) - m = 0\) for all \(i \in M\).
+	\begin{equation*}
+		s_{\beta}(x)(i) \eqdef \frac{\e^{\beta x(i)}}{\sum_{k=1}^c \e^{\beta x(k)}}
+		= \frac{\e^{\beta (x(i) - m)}}{\sum_{k=1}^c \e^{\beta (x(k) - m)}}
+		= \frac{\e^{\beta (x(i) - m)}}{\abs{M} + r_{\beta}}
+	\end{equation*}
+	where we have defined \(r_{\beta} = \sum_{i \notin M} \e^{\beta(x(i) -m)}\).
+	Each term in the finite sum tends to zero as \(\beta \to \infty\) because \(x(i) - m < 0\) for all \(i \notin M\).
+	By the algebraic limit theorem, it follows that \(\lim_{\beta \to \infty} s_{\beta}(x)(i) = \bool{i \in M} / \abs{M}\).
+	Now we write \(s_{\beta}(x)\) as a linear combination of the standard basis vectors.
+	\[\lim_{\beta \to \infty} s_{\beta}(x) = \lim_{\beta \to \infty} \sum_{i=1}^c s_{\beta}(x)(i) \vec{e}_i = \sum_{i \in M} \vec{e}_i / \abs{M} \]
+
+	The limit of a finite sum can be computed term by term.
+	\begin{align*}
+		\lim_{\beta \to \infty} f_{\beta}(x) = \sum_{i=1}^c \lim_{\beta \to \infty}  \softargmax(\beta x)(i) x(i)  = \sum_{i=1}^c \bool{i \in M} x(i) / \abs{M} = m
+	\end{align*}
+ Note that for \(\beta = 0\) the uniform distribution is produced, and for \(\beta < 0\) the analysis is the same with \(s(\beta x) = s(\abs{\beta} y)\) where \(y = -x\).
+ Therefore, \(s\) becomes soft argmin of \(x\).
+ \end{proof}

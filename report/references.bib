@@ -1,0 +1,260 @@
+@InProceedings{kim2023,
+ author = {Kim, Woojun and Shin, Yongjae and Park, Jongeui and Sung, Youngchul},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {A. Oh and T. Neumann and A. Globerson and K. Saenko and M. Hardt and S. Levine},
+ pages = {53239--53260},
+ publisher = {Curran Associates, Inc.},
+ title = {Sample-Efficient and Safe Deep Reinforcement Learning via Reset Deep Ensemble Agents},
+ url = {https://proceedings.neurips.cc/paper_files/paper/2023/file/a6f6a5c517b2b92f3d309786af64086c-Paper-Conference.pdf},
+ volume = {36},
+ year = {2023}
+}
+
+@InProceedings{nikishin2022,
+  title = 	 {The Primacy Bias in Deep Reinforcement Learning},
+  author =       {Nikishin, Evgenii and Schwarzer, Max and D'Oro, Pierluca and Bacon, Pierre-Luc and Courville, Aaron},
+  booktitle = 	 {Proceedings of the 39th International Conference on Machine Learning},
+  pages = 	 {16828--16847},
+  year = 	 {2022},
+  editor = 	 {Chaudhuri, Kamalika and Jegelka, Stefanie and Song, Le and Szepesvari, Csaba and Niu, Gang and Sabato, Sivan},
+  volume = 	 {162},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {7},
+  publisher =    {PMLR},
+  pdf = 	 {https://proceedings.mlr.press/v162/nikishin22a/nikishin22a.pdf},
+  url = 	 {https://proceedings.mlr.press/v162/nikishin22a.html},
+  abstract = 	 {This work identifies a common flaw of deep reinforcement learning (RL) algorithms: a tendency to rely on early interactions and ignore useful evidence encountered later. Because of training on progressively growing datasets, deep RL agents incur a risk of overfitting to earlier experiences, negatively affecting the rest of the learning process. Inspired by cognitive science, we refer to this effect as the primacy bias. Through a series of experiments, we dissect the algorithmic aspects of deep RL that exacerbate this bias. We then propose a simple yet generally-applicable mechanism that tackles the primacy bias by periodically resetting a part of the agent. We apply this mechanism to algorithms in both discrete (Atari 100k) and continuous action (DeepMind Control Suite) domains, consistently improving their performance.}
+}
+
+@InProceedings{achiam2017,
+      title={Constrained Policy Optimization}, 
+      author={Joshua Achiam and David Held and Aviv Tamar and Pieter Abbeel},
+      year={2017},
+      eprint={1705.10528},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+
+@article{cogsci,
+    author = {Philip H. Marshall and Pamela R. Werder},
+    title = {The effects of the elimination of rehearsal on primacy and recency},
+    journal = {Journal of Verbal Learning \& Verbal Behavior},
+    year = {1972},
+    volume = {11},
+    number = {5},
+    pages = {649-653}
+}
+
+@inproceedings{kumar2021,
+    title={Implicit Under-Parameterization Inhibits Data-Efficient Deep Reinforcement Learning},
+    author={Aviral Kumar and Rishabh Agarwal and Dibya Ghosh and Sergey Levine},
+    booktitle={International Conference on Learning Representations},
+    year={2021},
+    url={https://openreview.net/forum?id=O9bnihsFfXU}
+}
+
+@inproceedings{
+    lyle2022,
+    title={Understanding and Preventing Capacity Loss in Reinforcement Learning},
+    author={Clare Lyle and Mark Rowland and Will Dabney},
+    booktitle={International Conference on Learning Representations},
+    year={2022},
+    url={https://openreview.net/forum?id=ZkC8wKoLbQ7}
+}
+
+@article{minh2015,
+    author = {Volodymyr Mnih and Koray Kavukcuoglu and David Silver and Andrei A. Rusu and Joel Veness and Marc G. Bellemare and Alex Graves and Martin Riedmiller and Andreas K. Fidjeland and Georg Ostrovski and Stig Petersen and Charles Beattie and Amir Sadik and Ioannis Antonoglou and Helen King and Dharshan Kumaran and Daan Wierstra and Shane Legg and Demis Hassabis},
+    title = {Human-level control through deep reinforcement learning},
+    journal = {Nature},
+    year = {2015},
+    volume = {518},
+    pages = {529-533}
+}
+
+
+@InProceedings{anschel2017,
+  title = 	 {Averaged-{DQN}: Variance Reduction and Stabilization for Deep Reinforcement Learning},
+  author =       {Oron Anschel and Nir Baram and Nahum Shimkin},
+  booktitle = 	 {Proceedings of the 34th International Conference on Machine Learning},
+  pages = 	 {176--185},
+  year = 	 {2017},
+  editor = 	 {Precup, Doina and Teh, Yee Whye},
+  volume = 	 {70},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {8},
+  publisher =    {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v70/anschel17a/anschel17a.pdf},
+  url = 	 {https://proceedings.mlr.press/v70/anschel17a.html},
+  abstract = 	 {Instability and variability of Deep Reinforcement Learning (DRL) algorithms tend to adversely affect their performance. Averaged-DQN is a simple extension to the DQN algorithm, based on averaging previously learned Q-values estimates, which leads to a more stable training procedure and improved performance by reducing approximation error variance in the target values. To understand the effect of the algorithm, we examine the source of value function estimation errors and provide an analytical comparison within a simplified model. We further present experiments on the Arcade Learning Environment benchmark that demonstrate significantly improved stability and performance due to the proposed extension.}
+}
+
+@article{hasselt2016, 
+    title={Deep Reinforcement Learning with Double Q-Learning}, 
+    volume={30},
+    url={https://ojs.aaai.org/index.php/AAAI/article/view/10295}, 
+    DOI={10.1609/aaai.v30i1.10295}, 
+    abstractNote={ &lt;p&gt; The popular Q-learning algorithm is known to overestimate action values under certain conditions. It was not previously known whether, in practice, such overestimations are common, whether they harm performance, and whether they can generally be prevented. In this paper, we answer all these questions affirmatively. In particular, we first show that the recent DQN algorithm, which combines Q-learning with a deep neural network, suffers from substantial overestimations in some games in the Atari 2600 domain. We then show that the idea behind the Double Q-learning algorithm, which was introduced in a tabular setting, can be generalized to work with large-scale function approximation. We propose a specific adaptation to the DQN algorithm and show that the resulting algorithm not only reduces the observed overestimations, as hypothesized, but that this also leads to much better performance on several games. &lt;/p&gt; }, 
+    number={1}, 
+    journal={Proceedings of the AAAI Conference on Artificial Intelligence}, 
+    author={van Hasselt, Hado and Guez, Arthur and Silver, David}, 
+    year={2016}, 
+    month={3} 
+}
+
+
+@InProceedings{lee2021,
+  title = 	 {SUNRISE: A Simple Unified Framework for Ensemble Learning in Deep Reinforcement Learning},
+  author =       {Lee, Kimin and Laskin, Michael and Srinivas, Aravind and Abbeel, Pieter},
+  booktitle = 	 {Proceedings of the 38th International Conference on Machine Learning},
+  pages = 	 {6131--6141},
+  year = 	 {2021},
+  editor = 	 {Meila, Marina and Zhang, Tong},
+  volume = 	 {139},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {7},
+  publisher =    {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v139/lee21g/lee21g.pdf},
+  url = 	 {https://proceedings.mlr.press/v139/lee21g.html},
+  abstract = 	 {Off-policy deep reinforcement learning (RL) has been successful in a range of challenging domains. However, standard off-policy RL algorithms can suffer from several issues, such as instability in Q-learning and balancing exploration and exploitation. To mitigate these issues, we present SUNRISE, a simple unified ensemble method, which is compatible with various off-policy RL algorithms. SUNRISE integrates two key ingredients: (a) ensemble-based weighted Bellman backups, which re-weight target Q-values based on uncertainty estimates from a Q-ensemble, and (b) an inference method that selects actions using the highest upper-confidence bounds for efficient exploration. By enforcing the diversity between agents using Bootstrap with random initialization, we show that these different ideas are largely orthogonal and can be fruitfully integrated, together further improving the performance of existing off-policy RL algorithms, such as Soft Actor-Critic and Rainbow DQN, for both continuous and discrete control tasks on both low-dimensional and high-dimensional environments.}
+}
+
+@misc{schaul2016,
+      title={Prioritized Experience Replay}, 
+      author={Tom Schaul and John Quan and Ioannis Antonoglou and David Silver},
+      year={2016},
+      eprint={1511.05952},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+
+@inproceedings{wang2020,
+    title={Striving for Simplicity and Performance in Off-Policy DRL: Output Normalization and Non-Uniform Sampling}, 
+    author={Che Wang and Yanqiu Wu and Quan Vuong and Keith Ross},
+    year={2020},
+    series = {International Conference on Machine Learning},
+    publisher =    {ICML},
+    pages = {10070-10080}
+}
+
+
+@InProceedings{fedus2020,
+  title = 	 {Revisiting Fundamentals of Experience Replay},
+  author =       {Fedus, William and Ramachandran, Prajit and Agarwal, Rishabh and Bengio, Yoshua and Larochelle, Hugo and Rowland, Mark and Dabney, Will},
+  booktitle = 	 {Proceedings of the 37th International Conference on Machine Learning},
+  pages = 	 {3061--3071},
+  year = 	 {2020},
+  editor = 	 {III, Hal Daumé and Singh, Aarti},
+  volume = 	 {119},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {7},
+  publisher =    {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v119/fedus20a/fedus20a.pdf},
+  url = 	 {https://proceedings.mlr.press/v119/fedus20a.html},
+  abstract = 	 {Experience replay is central to off-policy algorithms in deep reinforcement learning (RL), but there remain significant gaps in our understanding. We therefore present a systematic and extensive analysis of experience replay in Q-learning methods, focusing on two fundamental properties: the replay capacity and the ratio of learning updates to experience collected (replay ratio). Our additive and ablative studies upend conventional wisdom around experience replay {—} greater capacity is found to substantially increase the performance of certain algorithms, while leaving others unaffected. Counterintuitively we show that theoretically ungrounded, uncorrected n-step returns are uniquely beneficial while other techniques confer limited benefit for sifting through larger memory. Separately, by directly controlling the replay ratio we contextualize previous observations in the literature and empirically measure its importance across a variety of deep RL algorithms. Finally, we conclude by testing a set of hypotheses on the nature of these performance benefits.}
+}
+
+@misc{hasselt2019,
+      title={When to use parametric models in reinforcement learning?}, 
+      author={Hado van Hasselt and Matteo Hessel and John Aslanides},
+      year={2019},
+      eprint={1906.05243},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+
+@inproceedings{schwarzer2020,
+    title={Data-Efficient Reinforcement Learning with Self-Predictive Representations}, 
+    author={Max Schwarzer and Ankesh Anand and Rishab Goel and R. Devon Hjelm and Aaron Courville and Philip Bachman},
+    year={2020},
+    series = {International Conference on Learning Representations},
+    publisher =    {ICLR},
+}
+
+@misc{sac,
+      title={Soft Actor-Critic Algorithms and Applications}, 
+      author={Tuomas Haarnoja and Aurick Zhou and Kristian Hartikainen and George Tucker and Sehoon Ha and Jie Tan and Vikash Kumar and Henry Zhu and Abhishek Gupta and Pieter Abbeel and Sergey Levine},
+      year={2019},
+      eprint={1812.05905},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+
+@misc{kostrikov2021,
+      title={Image Augmentation Is All You Need: Regularizing Deep Reinforcement Learning from Pixels}, 
+      author={Ilya Kostrikov and Denis Yarats and Rob Fergus},
+      year={2021},
+      eprint={2004.13649},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+
+@inproceedings{doro2023,
+    author = {Pierluca D'Oro and Max Schwarzer and Evgenii Nikishin and Pierre-Luc Bacon and Marc G Bellemare and Aaron Courville},
+    title = {Sample-Efficient Reinforcement Learning by Breaking the Replay Ratio Barrier},
+    year = {2023},
+    series = {The Eleventh International Conference on Learning Representations},
+}
+
+@misc{hasselt2018,
+      title={Deep Reinforcement Learning and the Deadly Triad}, 
+      author={Hado van Hasselt and Yotam Doron and Florian Strub and Matteo Hessel and Nicolas Sonnerat and Joseph Modayil},
+      year={2018},
+      eprint={1812.02648},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI}
+}
+
+@misc{jin2017accelerated,
+      title={Accelerated Gradient Descent Escapes Saddle Points Faster than Gradient Descent}, 
+      author={Chi Jin and Praneeth Netrapalli and Michael I. Jordan},
+      year={2017},
+      eprint={1711.10456},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+
+@article{atari,
+   title={The Arcade Learning Environment: An Evaluation Platform for General Agents},
+   volume={47},
+   ISSN={1076-9757},
+   url={http://dx.doi.org/10.1613/jair.3912},
+   DOI={10.1613/jair.3912},
+   journal={Journal of Artificial Intelligence Research},
+   publisher={AI Access Foundation},
+   author={Bellemare, M. G. and Naddaf, Y. and Veness, J. and Bowling, M.},
+   year={2013},
+   pages={253–279} 
+}
+
+@misc{minigrid,
+    title={Minimalistic gridworld environment for OpenAI Gym},
+    author={Maxime Chevalier-Boisvert and Lucas Willems and Suman Pal},
+    year={2018}
+}
+
+@misc{dmc,
+      title={DeepMind Control Suite}, 
+      author={Yuval Tassa and Yotam Doron and Alistair Muldal and Tom Erez and Yazhe Li and Diego de Las Casas and David Budden and Abbas Abdolmaleki and Josh Merel and Andrew Lefrancq and Timothy Lillicrap and Martin Riedmiller},
+      year={2018},
+      eprint={1801.00690},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI}
+}
+
+@misc{gym,
+      title={OpenAI Gym}, 
+      author={Greg Brockman and Vicki Cheung and Ludwig Pettersson and Jonas Schneider and John Schulman and Jie Tang and Wojciech Zaremba},
+      year={2016},
+      eprint={1606.01540},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+
+@misc{fujimoto2018,
+      title={Addressing Function Approximation Error in Actor-Critic Methods}, 
+      author={Scott Fujimoto and Herke van Hoof and David Meger},
+      year={2018},
+      eprint={1802.09477},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI}
+}
