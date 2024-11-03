@@ -38,7 +38,8 @@ They carry out tests over a series of environments, including Atari-100k, MiniGr
 \subsection{Road Map}
 
 Our project aims to reproduce the results of \cite{kim2023}.
-Given the algorithm pseudocode they have provided alongside the parameters they tuned, we write code from scratch to employ RDE alongside DQN and SAC.
+Starting from the algorithm pseudocode they have provided alongside the parameters they tuned, we write code from scratch to employ RDE alongside DQN and SAC.
+Modifications to the vanilla algorithm that were found necessary for convergence are made.
 We evaluate our implementation of RDE with SAC using the \texttt{Cheetah-Run} setting in the DMC suite and compare our results with those produced by \cite{kim2023}.
 After, because of computation and time constraints, rather than performing training in the Atari-100k and MiniGrid environments, which are much harder to learn, we instead evaluate our implementations of RDE with SAC and DQN in the \texttt{Mountain Car Continuous} and \texttt{Cart Pole} Gym environments \cite{gym}.
 

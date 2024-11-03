@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+title: Sample-Efficient and Safe Deep Reinforcement Learning via Reset Deep Ensemble Agents
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Kaya
+    family-names: Unalmis
+    email: kayaunalmis@proton.me
+    affiliation: Princeton University
+    orcid: 'https://orcid.org/0000-0002-1755-6764'
+  - given-names: Lily
+    family-names: Gittoes
+    email: lgittoes@princeton.edu
+    affiliation: Princeton University
+license: GPL-3.0-or-later
