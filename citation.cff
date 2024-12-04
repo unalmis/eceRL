@@ -7,7 +7,7 @@ type: software
 authors:
   - given-names: Kaya
     family-names: Unalmis
-    email: kayaunalmis@proton.me
+    email: kunalmis@princeton.edu
     affiliation: Princeton University
     orcid: 'https://orcid.org/0000-0002-1755-6764'
   - given-names: Lily
@@ -15,4 +15,5 @@ authors:
     email: lgittoes@princeton.edu
     affiliation: Princeton University
 license: GPL-3.0-or-later
-url: "https://github.com/unalmis/eceRL/blob/main/Gittoes_Unalmis_RDE.pdf"
+date-released: 2024-04-18
+url: "https://github.com/unalmis/eceRL"
